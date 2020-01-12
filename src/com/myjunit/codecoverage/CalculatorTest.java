@@ -14,9 +14,10 @@ public class CalculatorTest {
 
 	@Test
 	public void test() {
+		System.out.println("Starting Junit ...");
 		int i=0;int j = 0; int sum = 0;
 		int sumc = c.add(i, j);
-	//	assertEquals(sum, sumc);
+		assertEquals(sum, sumc);
 
 	}
 
