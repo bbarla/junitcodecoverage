@@ -32,7 +32,7 @@
 	</copy>
 	</target>
    <target name = "test" depends = "compile">
-      <junit>
+      <junit fork="true">
          <classpath refid = "classpath.test" />
          <formatter type = "plain" usefile = "false" />
          <test name = "com.myjunit.codecoverage.CalculatorTest" />
