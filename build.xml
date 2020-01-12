@@ -30,7 +30,7 @@
    <target name = "test" depends = "compile">
       <junit>
          <classpath refid = "classpath.test" />
-         <formatter type = "xml" />
+         <formatter type = "plain" usefile = "false" />
          <test name = "com.myjunit.codecoverage.CalculatorTest" />
       </junit>
    </target>
