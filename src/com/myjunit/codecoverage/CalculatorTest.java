@@ -18,7 +18,7 @@ public class CalculatorTest {
 	@Test
 	public void test() {
 		System.out.println("Starting Junit ...");
-		int i=0;int j = 0; int sum = 0;
+		int i=10;int j = 20; int sum = 30;
 		boolean condition = false;
 		int sumc = c.add(i, j);
 		if(sum==sumc) {
