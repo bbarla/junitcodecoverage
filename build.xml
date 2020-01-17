@@ -34,11 +34,11 @@
 	     <classpath refid = "classpath.test" />
       </javac>
    </target>
-	<target name = "copy" depends = "clean" >
+	<!--  <target name = "copy" depends = "clean" >
 	<copy overwrite="true" todir="${testdir}">
 	<fileset dir="lib" includes="*.jar"></fileset>
 	</copy>
-	</target>
+	</target> -->
 	
    <target name = "test" depends = "compile">
    <jacoco:coverage destfile="${execfile}">
