@@ -22,8 +22,8 @@
 	</taskdef>
 	
    <target name = "clean" >
-      <delete dir="${classesdir}" />
-      <delete dir="${reportdir}" />
+      <delete dir="${testdir}" />
+      <delete dir="${srcir}" />
       
    </target>
 	
@@ -42,9 +42,9 @@
 	
    <target name = "test" depends = "compile">
    <jacoco:coverage destfile="${execfile}">
-      <junit fork="true">
+      <junit fork="true" forkmode="once" printsummary="on">
          <classpath refid = "classpath.test" />
-         <formatter type = "plain" usefile = "false" />
+         <formatter type = "xml" usefile = "false" />
          <test name = "com.myjunit.codecoverage.CalculatorTest" />
       </junit>
          </jacoco:coverage>
@@ -52,7 +52,7 @@
 
   <target name="report" depends="test">
 		<!-- Step 3: Create coverage report -->
-		<jacoco:report>
+		<jacoco:report >
 
 			<!-- This task needs the collected execution data and ... -->
 			<executiondata>
