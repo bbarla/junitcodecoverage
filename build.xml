@@ -1,32 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name = "JunitTest" default = "test" basedir = "."  xmlns:jacoco="antlib:org.jacoco.ant" >
+<project name = "JunitTest" default = "test" basedir = "."   >
    <property name = "testdir" location = "test" />
    <property name = "classesdir" location = "${testdir}/classes" />
    <property name = "srcdir" location = "src" />
-   <property name = "reportdir" location = "${testdir}/report/site/jacoco" />
-   <property name = "execfile" location = "${testdir}/report/jacoco.exec" />
    <property name = "full-compile" value = "true" />
-	
+   	<property name = "cloverjar" value="lib/clover.jar" />
+ 	
    <path id = "classpath.base" />
-    
-  
-   <path id = "classpath.test">
+     <path id = "classpath.test">
       <pathelement location = "${testdir}" />
       <pathelement location = "${srcdir}" />
       <pathelement location = "${classesdir}" />
+      <pathelement location = "${cloverjar}" />
       <fileset dir="lib" includes="*.jar" />
       <path refid = "classpath.base" />
    </path>
-	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-	<classpath path="lib/jacocoant.jar" />
-	</taskdef>
-	
+
+   	<target name="print-classpath">
+   			
+   		<pathconvert property="classpathInName" refid="classpath.test" />
+   		<echo>Classpath is ${classpathInName}</echo>
+   			
+   	  </target>
+   	
+   	
    <target name = "clean" >
       <delete dir="${testdir}" />
       <delete dir="${srcir}" />
       
    </target>
-	
+   	<taskdef resource="cloverlib.xml" classpath="${cloverjar}"/>
+   		<target name="-check.clover">
+   		<available property="clover.installed"
+   		classname="com.atlassian.clover.CloverInstr" />
+   		</target>
+
+   		<target name="guard.noclover" depends="-check.clover" unless="clover.installed">
+   		<fail message="The target you are attempting to run requires Clover, which doesn't appear to be installed"/>
+   		</target>
+
+   		<target name="with.clover">
+		<clover-setup/>
+		</target>
+
    <target name = "compile" depends = "clean" >
    <mkdir dir="${classesdir}" />
       <javac srcdir = "${srcdir}" destdir = "${classesdir}" 
@@ -34,46 +50,21 @@
 	     <classpath refid = "classpath.test" />
       </javac>
    </target>
-	<!--  <target name = "copy" depends = "clean" >
-	<copy overwrite="true" todir="${testdir}">
-	<fileset dir="lib" includes="*.jar"></fileset>
-	</copy>
-	</target> -->
+
+   	<target name="clover.html">
+      	    <clover-html-report outdir="coverage"/>
+      	</target>
+
 	
    <target name = "test" depends = "compile">
-   <jacoco:coverage destfile="${execfile}">
+   
       <junit fork="true" forkmode="once" printsummary="on">
          <classpath refid = "classpath.test" />
-         <formatter type = "xml" usefile = "false" />
+         <formatter type = "plain" usefile = "false" />
          <test name = "com.myjunit.codecoverage.CalculatorTest" />
       </junit>
-         </jacoco:coverage>
    </target>
 
-  <target name="report" depends="test">
-		<!-- Step 3: Create coverage report -->
-		<jacoco:report >
 
-			<!-- This task needs the collected execution data and ... -->
-			<executiondata>
-				<file file="${execfile}" />
-			</executiondata>
-
-			<!-- the class files and optional source files ... -->
-			<structure name="JaCoCo Ant Example">
-				<classfiles>
-					<fileset dir="${classesdir}" />
-				</classfiles>
-				<sourcefiles encoding="UTF-8">
-					<fileset dir="${srcdir}" />
-				</sourcefiles>
-			</structure>
-
-			<!-- to produce reports in different formats. -->
-			<html destdir="${reportdir}" />
-			<csv destfile="${reportdir}/report.csv" />
-			<xml destfile="${reportdir}/report.xml" />
-		</jacoco:report>
-	</target> 
 	
 </project>
