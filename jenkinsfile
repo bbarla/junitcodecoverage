@@ -6,7 +6,7 @@ pipeline {
         steps {
                   withAnt(installation :"1.10.7") {
                   
-					sh ant with.clover test                                    
+					sh "ant with.clover test"                                    
                                 }
         }
              }
