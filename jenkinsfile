@@ -6,7 +6,7 @@ pipeline {
         steps {
                   withAnt(installation :"antjenkins") {
                   
-					sh "ant with.clover test"                                    
+					sh "ant print-classpath with.clover test"                                    
                                 }
         }
              }
