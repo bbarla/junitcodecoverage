@@ -54,7 +54,13 @@
    	<target name="clover">
       	    <clover-html-report outdir="coverage"/>
       	</target>
-
+	<target name="clover.xml">
+	    <clover-report>
+	       <current outfile="coverage.xml">
+	          <format type="xml"/>
+	       </current>
+	    </clover-report>
+	</target>
 	
    <target name = "test" depends = "compile">
    
