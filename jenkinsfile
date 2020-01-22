@@ -6,7 +6,7 @@ pipeline {
         steps {
                   withAnt(installation :"antjenkins") {
                   
-					sh "-lib /var/lib/jenkins/workspace/junit-pipeline/lib/clover.jar with.clover test"                                    
+					sh ant "-lib /var/lib/jenkins/workspace/junit-pipeline/lib/clover.jar with.clover test"                                    
                                 }
         }
              }
