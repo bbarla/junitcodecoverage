@@ -4,7 +4,7 @@ pipeline {
         
         stage ('Test') {
         steps {
-                  withAnt(installation :"1.10.7") {
+                  withAnt(installation :"antjenkins") {
                   
 					sh "ant with.clover test"                                    
                                 }
