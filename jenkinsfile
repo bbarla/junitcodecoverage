@@ -7,9 +7,9 @@ pipeline {
                   withAnt(installation :"antjenkins") {
                   
 					sh "ant -lib /var/lib/jenkins/workspace/junit-pipeline/lib/clover.jar with.clover test clover.html"
-                                     
-                                }
+					step([$class: 'CloverPublisher',cloverReportDir: 'target/site',cloverReportFileName: 'clover.html'])                                
         }
              }
     }
+}
 }
