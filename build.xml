@@ -51,8 +51,8 @@
       </javac>
    </target>
 
-   	<target name="clover.xml">
-      	    <clover-xml-report outdir="coverage"/>
+   	<target name="clover">
+      	    <clover-html-report outdir="coverage"/>
       	</target>
 
 	
