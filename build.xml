@@ -56,7 +56,7 @@
       	</target>
 	<target name="clover.xml">
 	    <clover-report>
-	       <current outdir="coverage" outfile="coverage.xml">
+	       <current  outfile="coverage\coverage.xml">
 	          <format type="xml"/>
 	       </current>
 	    </clover-report>
