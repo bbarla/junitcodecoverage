@@ -51,14 +51,15 @@
       </javac>
    </target>
 
-   	<target name="clover.html">
-      	    <clover-html-report outdir="coverage"/>
+   	<target name="clover.xml">
+      	    <clover-xml-report outdir="coverage"/>
       	</target>
 
 	
    <target name = "test" depends = "compile">
    
       <junit fork="true" forkmode="once" printsummary="on">
+      	
          <classpath refid = "classpath.test" />
          <formatter type = "plain" usefile = "false" />
          <test name = "com.myjunit.codecoverage.CalculatorTest" />
