@@ -4,7 +4,7 @@ pipeline {
         
         stage ('Test') {
         steps {
-                  withAnt(installation :"antjenkins") {
+                  withAnt() {
                   
 					sh "ant -lib /var/lib/jenkins/workspace/junit-pipeline/lib/clover.jar with.clover test clover.xml"
 					step([$class: 'CloverPublisher',cloverReportDir: 'coverage',cloverReportFileName: 'coverage.xml',
